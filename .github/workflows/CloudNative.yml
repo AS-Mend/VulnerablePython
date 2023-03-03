@@ -41,6 +41,6 @@ jobs:
         MEND_USER_KEY: 'c29009409106422e854ecc5d36660914cb370a5e1ae74117bf7bcaae52204b31'
         MEND_URL: 'https://saas-eu.whitesourcesoftware.com'  
       run: |
-        echo Downloading WhiteSource Unified Agent
+        echo Downloading Mend CLI
         curl https://downloads.mend.io/production/unified/latest/linux_amd64/mend -o /usr/local/bin/mend && chmod +x /usr/local/bin/mend
         mend sca -u
