@@ -1,0 +1,46 @@
+name: Mend CLI Python
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  prioritize:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install virtualenv --user
+        pip install -r requirements.txt
+    
+    - name: Mend CLI Scan
+      env:
+        MEND_EMAIL: 'amir.shahmiri@mend.io'
+        MEND_USER_KEY: 'c29009409106422e854ecc5d36660914cb370a5e1ae74117bf7bcaae52204b31'
+        MEND_URL: 'https://saas-eu.whitesourcesoftware.com'  
+      run: |
+        echo Downloading WhiteSource Unified Agent
+        curl https://downloads.mend.io/production/unified/latest/linux_amd64/mend -o /usr/local/bin/mend && chmod +x /usr/local/bin/mend
+        mend sca -u
