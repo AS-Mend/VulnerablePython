@@ -42,11 +42,11 @@ jobs:
         WS_WSS_URL: https://saas-eu.mend.io/agent
         WS_PRODUCTNAME: GH_${{github.event.repository.name}}
         ##WS_PROJECTNAME: ${{github.ref}}_Prioritize
-        WS_ENABLEIMPACTANALYSIS: true
-        WS_RESOLVEALLDEPENDENCIES: false
-        WS_PYTHON_RESOLVEDEPENDENCIES: true
-        WS_FILESYSTEMSCAN: false
-        WS_GENERATEPROJECTDETAILSJSON: true
+        #WS_ENABLEIMPACTANALYSIS: true
+        #WS_RESOLVEALLDEPENDENCIES: false
+        #WS_PYTHON_RESOLVEDEPENDENCIES: true
+        #WS_FILESYSTEMSCAN: false
+        #WS_GENERATEPROJECTDETAILSJSON: true
       run: |
         curl -LJO https://unified-agent.s3.amazonaws.com/wss-unified-agent.jar
         echo Unified Agent downloaded successfully
@@ -56,4 +56,4 @@ jobs:
             echo "Integrity Check Passed"
             echo "Starting Mend Scan"
         fi
-        java -jar wss-unified-agent.jar -appPath ./requirements.txt -d ./ projectPerFolder true
+        java -jar wss-unified-agent.jar -d ./ projectPerFolder true
