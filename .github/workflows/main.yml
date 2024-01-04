@@ -37,8 +37,8 @@ jobs:
     
     - name: Mend Prioritize Scan
       env:
-        WS_APIKEY: '5d8562edabf7471082f8fa98d79f343a6b3a4dcaa4674f528a3b809193a9225d'
-        WS_USERKEY: 'cea34b2d1d5c4112a629aded65a526f923bcc437450e4373877fb43b450e11d0'
+        WS_APIKEY: ${{secrets.APIKEY}}
+        WS_USERKEY: ${{secrets.MEND_USER_KEY}}
         WS_WSS_URL: https://saas-eu.mend.io/agent
         WS_PRODUCTNAME: GH_${{github.event.repository.name}}
         WS_PROJECTNAME: ${{github.ref}}_Prioritize
