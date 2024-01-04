@@ -56,4 +56,4 @@ jobs:
             echo "Integrity Check Passed"
             echo "Starting Mend Scan"
         fi
-        java -jar wss-unified-agent.jar -d ./ projectPerFolder true
+        java -jar wss-unified-agent.jar -appPath ./requirements.txt -d ./
